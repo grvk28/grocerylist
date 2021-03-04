@@ -2,6 +2,8 @@ import uuid
 from django.db import models
 from django.conf import settings
 from datetime import datetime
+from django.urls import reverse
+#from .views  import index
 
 User=settings.AUTH_USER_MODEL
 
@@ -20,6 +22,9 @@ class Items(models.Model):
     slug=models.SlugField()
     status=models.CharField(max_length=500)
     date = models.DateField(default=datetime.now)
+
+    def get_absolute_url(self):
+        return reverse('home')
     
     def __str__(self):
         return self.Item

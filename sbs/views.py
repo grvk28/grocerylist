@@ -4,6 +4,7 @@ from .models import Items
 #, ViewCount, VideoComment
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
+from django.views.generic import UpdateView
 #from django.urls import reverse
 
 
@@ -39,21 +40,13 @@ def add(request):
       
     return render(request,"add.html",{'form':list1})
 
-@login_required
-def update(request,id):
-    It=Items.objects.filter(id=id)
-    if request.method=="POST":
-        form=m1(id,request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect(index)
-            
-    else:
-        form=m1(id,request.POST)
-        context={
-            "It1":form
-        }
-        return render(request,"update.html",context)
+
+class update(UpdateView):
+    model=Items
+    form_class=m1
+    template_name='update.html'
+    redirect=index
+    
 
 @login_required
 def delete(request,id):

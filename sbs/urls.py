@@ -11,10 +11,11 @@ from .views import (
 
 
 urlpatterns=[
-   path('', i, name="home"),
+   path('', i, name="home1"),
    path('index', index, name="home"),
-   path('accounts/profile/',index,name="home"),    path("add", add, name="edit"),
-   path("edit/<int:id>/", views.update, name="edit"),
-   path("delete/<int:id>/", views.delete, name="home"),
+   path('accounts/profile/',index,name="home2"),    
+   path("add", add, name="edit"),
+   path("edit/<int:pk>", views.update.as_view(), name="update"),
+   path("delete/<int:id>/", delete, name="home3"),
    path("filter",views.filter,name="j")
 ]
